@@ -14,15 +14,35 @@
 
 @implementation ViewController
 
+@synthesize tabBar;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    self.view.backgroundColor = [UIColor lightGrayColor];
+    [self setupTabBar];
 }
 
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+}
+
+- (void) setupTabBar
+{
+    tabBar.delegate = self;
+    
+    tabBar.tintColor = [UIColor blackColor];
+    tabBar.translucent = NO;
+    
+    NSMutableArray *tabItems = [NSMutableArray arrayWithCapacity:5];
+    for (int i = 0; i < 5; ++i) {
+        UITabBarItem *tab = [[UITabBarItem alloc] init];
+        [tab setTitle:@"Tab Title"];
+        tab.image = [[UIImage imageNamed:@"home_tab"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        [tabItems addObject:tab];
+    }
+    [self.tabBar setItems:tabItems];
+    [self.tabBar setSelectedItem:[tabItems objectAtIndex:0]];
 }
 
 
